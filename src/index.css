@@ -1,0 +1,20 @@
+* {
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  
+}
+
+body {
+  overflow:hidden;
+}
+
+@font-face {
+  font-family: 'Shlop';
+  src: url('/fonts/shlop.otf') format("opentype");
+  font-display: block;
+}
+
+.shlop-font {
+  font-family: 'Shlop', serif;
+}
