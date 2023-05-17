@@ -154,7 +154,7 @@ const Scene = ({ camerasRef }: SceneProps) => {
           const webY = getRandomNumberBetween(-0.17, 0.2);
 
           return (
-            <Fragment key={i}>
+            <Fragment key={i + el}>
               <mesh
                 position={[x, 0.3, z]}
                 rotation={[0, rotateY, rotateZ]}
