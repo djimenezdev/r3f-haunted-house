@@ -5,7 +5,6 @@ import { PointLight, RepeatWrapping } from "three";
 import Bush from "./components/Bush";
 import { getRandomNumberBetween } from "./utils/func";
 import Spider from "./components/Spider";
-import { Leva } from "leva";
 
 const Scene = () => {
   const ghost1 = useRef<PointLight>(null);
