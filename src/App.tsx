@@ -1,8 +1,13 @@
 import { Canvas } from "@react-three/fiber";
 import styled from "styled-components";
 import Scene from "./Scene";
-import { PerspectiveCamera } from "@react-three/drei";
-import { Dispatch, SetStateAction, useRef } from "react";
+import {
+  Html,
+  Loader,
+  PerspectiveCamera,
+  useProgress,
+} from "@react-three/drei";
+import { Dispatch, SetStateAction, Suspense, useRef } from "react";
 import { folder, useControls } from "leva";
 import { PerspectiveCamera as PCamera } from "three";
 import { gsap } from "gsap";
@@ -10,6 +15,7 @@ import StartUI from "./components/StartUI";
 
 function App() {
   const sceneCamera = useRef<PCamera>(null);
+  const { progress } = useProgress();
 
   const { positionX, positionY, positionZ, rotationX, rotationY, rotationZ } =
     useControls("Default Camera", {
@@ -85,9 +91,17 @@ function App() {
           near={0.1}
           far={1000}
         />
-        <Scene camerasRef={sceneCamera} />
+        <Suspense
+          fallback={
+            <Html>
+              <Loader />
+            </Html>
+          }
+        >
+          <Scene />
+        </Suspense>
       </Canvas>
-      <StartUI moveCamera={moveCamera} />
+      {progress === 100 && <StartUI moveCamera={moveCamera} />}
     </AppContainer>
   );
 }
