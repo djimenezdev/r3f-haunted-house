@@ -1,12 +1,14 @@
 import { gsap } from "gsap";
+import { Leva } from "leva";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import styled from "styled-components";
 
 type StartUIProps = {
   moveCamera: (setStart: Dispatch<SetStateAction<boolean>>) => void;
+  progress: number;
 };
 
-const StartUI = ({ moveCamera }: StartUIProps) => {
+const StartUI = ({ moveCamera, progress }: StartUIProps) => {
   const [start, setStart] = useState(false);
   const startContainerRef = React.useRef<HTMLDivElement>(null);
 
@@ -35,12 +37,20 @@ const StartUI = ({ moveCamera }: StartUIProps) => {
   }, [start]);
 
   return (
-    <StartContainer ref={startContainerRef}>
-      <StartTitle className="shlop-font">Haunted House</StartTitle>
-      <StartButton className="shlop-font" onClick={() => moveCamera(setStart)}>
-        Start
-      </StartButton>
-    </StartContainer>
+    <>
+      {progress === 100 && (
+        <StartContainer ref={startContainerRef}>
+          <StartTitle className="shlop-font">Haunted House</StartTitle>
+          <StartButton
+            className="shlop-font"
+            onClick={() => moveCamera(setStart)}
+          >
+            Start
+          </StartButton>
+        </StartContainer>
+      )}
+      <Leva hidden={!start} />
+    </>
   );
 };
 

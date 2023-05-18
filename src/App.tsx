@@ -101,7 +101,7 @@ function App() {
           <Scene />
         </Suspense>
       </Canvas>
-      {progress === 100 && <StartUI moveCamera={moveCamera} />}
+      <StartUI moveCamera={moveCamera} progress={progress} />
     </AppContainer>
   );
 }
