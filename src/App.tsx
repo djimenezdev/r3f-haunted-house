@@ -93,7 +93,7 @@ function App() {
         />
         <Suspense
           fallback={
-            <Html>
+            <Html center>
               <Loader />
             </Html>
           }
