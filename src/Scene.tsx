@@ -1,17 +1,12 @@
 import { OrbitControls, Ring, Text, useTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { Fragment, RefObject, useRef } from "react";
-import { PointLight, RepeatWrapping, Vector3 } from "three";
+import { Fragment, useRef } from "react";
+import { PointLight, RepeatWrapping } from "three";
 import Bush from "./components/Bush";
 import { getRandomNumberBetween } from "./utils/func";
 import Spider from "./components/Spider";
-import { PerspectiveCamera } from "three";
 
-type SceneProps = {
-  camerasRef: RefObject<PerspectiveCamera>;
-};
-
-const Scene = ({ camerasRef }: SceneProps) => {
+const Scene = () => {
   const ghost1 = useRef<PointLight>(null);
   const ghost2 = useRef<PointLight>(null);
   const ghost3 = useRef<PointLight>(null);
@@ -83,13 +78,6 @@ const Scene = ({ camerasRef }: SceneProps) => {
       ghost3.current.position.y =
         Math.sin(elapsedTime * 4) + Math.sin(elapsedTime * 2.5);
     }
-    if (orbitControlsRef.current) {
-      if (!orbitControlsRef.current.enabled && camerasRef.current) {
-        if (camerasRef.current.position.distanceTo(new Vector3(0, 0, 0)) >= 6) {
-          orbitControlsRef.current.enabled = true;
-        }
-      }
-    }
   });
 
   return (
@@ -103,7 +91,7 @@ const Scene = ({ camerasRef }: SceneProps) => {
         shadow-mapSize={256}
       />
       <fog attach="fog" color={0x262837} near={1} far={15} />
-      <OrbitControls ref={orbitControlsRef} enabled={false} />
+      <OrbitControls ref={orbitControlsRef} />
       <mesh
         position={[0, 0, 0]}
         rotation={[-Math.PI * 0.5, 0, 0]}
