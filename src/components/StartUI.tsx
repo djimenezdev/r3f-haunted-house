@@ -17,6 +17,20 @@ const StartUI = ({ moveCamera }: StartUIProps) => {
         opacity: 0,
         display: "none",
       });
+    } else {
+      gsap.fromTo(
+        startContainerRef.current,
+        {
+          opacity: 0,
+          display: "none",
+        },
+        {
+          opacity: 1,
+          display: "flex",
+          delay: 1,
+          duration: 2,
+        }
+      );
     }
   }, [start]);
 
