@@ -13,8 +13,10 @@ const StartUI = ({ moveCamera, progress }: StartUIProps) => {
   const startContainerRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    console.log("y");
     if (startContainerRef.current && progress === 100) {
       if (start) {
+        console.log(progress);
         gsap.to(startContainerRef.current, {
           duration: 1,
           opacity: 0,
@@ -33,7 +35,7 @@ const StartUI = ({ moveCamera, progress }: StartUIProps) => {
 
   return (
     <>
-      {progress === 100 && (
+      {!start && progress === 100 && (
         <StartContainer ref={startContainerRef}>
           <StartTitle className="shlop-font">Haunted House</StartTitle>
           <StartButton
