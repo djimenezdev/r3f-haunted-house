@@ -13,26 +13,28 @@ const StartUI = ({ moveCamera, progress }: StartUIProps) => {
   const startContainerRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (start && startContainerRef.current) {
-      gsap.to(startContainerRef.current, {
-        duration: 1,
-        opacity: 0,
-        display: "none",
-      });
-    } else {
-      gsap.fromTo(
-        startContainerRef.current,
-        {
+    if (startContainerRef.current) {
+      if (start) {
+        gsap.to(startContainerRef.current, {
+          duration: 1,
           opacity: 0,
           display: "none",
-        },
-        {
-          opacity: 1,
-          display: "flex",
-          delay: 1,
-          duration: 2,
-        }
-      );
+        });
+      } else {
+        gsap.fromTo(
+          startContainerRef.current,
+          {
+            opacity: 0,
+            display: "none",
+          },
+          {
+            opacity: 1,
+            display: "flex",
+            delay: 1,
+            duration: 2,
+          }
+        );
+      }
     }
   }, [start]);
 
