@@ -13,7 +13,7 @@ const StartUI = ({ moveCamera, progress }: StartUIProps) => {
   const startContainerRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (startContainerRef.current) {
+    if (startContainerRef.current && progress === 100) {
       if (start) {
         gsap.to(startContainerRef.current, {
           duration: 1,
@@ -21,22 +21,15 @@ const StartUI = ({ moveCamera, progress }: StartUIProps) => {
           display: "none",
         });
       } else {
-        gsap.fromTo(
-          startContainerRef.current,
-          {
-            opacity: 0,
-            display: "none",
-          },
-          {
-            opacity: 1,
-            display: "flex",
-            delay: 1,
-            duration: 2,
-          }
-        );
+        gsap.to(startContainerRef.current, {
+          opacity: 1,
+          display: "flex",
+          delay: 1.5,
+          duration: 2,
+        });
       }
     }
-  }, [start]);
+  }, [start, progress]);
 
   return (
     <>
@@ -59,9 +52,10 @@ const StartUI = ({ moveCamera, progress }: StartUIProps) => {
 export default StartUI;
 
 const StartContainer = styled.div`
+  display: none;
+  opacity: 0;
   position: absolute;
   top: 0;
-  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
